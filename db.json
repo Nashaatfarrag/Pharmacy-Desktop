@@ -1,0 +1,58 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "title": "lowdb is awesome"
+    },
+    {
+      "id": 1,
+      "title": "lowdb is awesome"
+    }
+  ],
+  "user": {
+    "name": "typicode"
+  },
+  "count": 56,
+  "drugs": [
+    {
+      "id": 1,
+      "name": "Oxygen",
+      "price": 35
+    },
+    {
+      "id": 1,
+      "name": "Nitrous oxide",
+      "price": 35
+    },
+    {
+      "id": 1,
+      "name": "Propofol",
+      "price": 35
+    },
+    {
+      "id": 1,
+      "name": "Bupivacaine",
+      "price": 35
+    },
+    {
+      "id": 1,
+      "name": "Bupivacaine",
+      "price": 35
+    },
+    {
+      "id": 1,
+      "name": "Bupivacaine",
+      "price": 35
+    },
+    {
+      "id": 1,
+      "name": "Ephedrine",
+      "price": 35
+    },
+    {
+      "id": 1,
+      "name": "Lidocaine",
+      "price": 35
+    }
+  ]
+}
