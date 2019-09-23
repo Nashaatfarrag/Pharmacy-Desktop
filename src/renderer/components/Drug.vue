@@ -1,7 +1,7 @@
 <template>
-  <div style="margin:20px" class="text-center">
+  <div style="margin:20px" class="text-center" >
     <b-form @submit="onSubmit" @reset="onReset" v-if="show">
-      <b-form-group id="input-group-2" label="إسم العميل" label-for="input-2" class="text-right">
+      <b-form-group id="input-group-2" label="إسم الدواء" label-for="input-2" class="text-right">
         <b-form-input
           id="input-2"
           v-model="form.name"
@@ -11,38 +11,14 @@
         ></b-form-input>
       </b-form-group>
 
-      <b-form-group id="input-group-1" label="رقم الموبايل" label-for="input-1" class="text-right">
+      <b-form-group id="input-group-1" label="السعر" label-for="input-1" class="text-right">
         <b-form-input id="input-1" v-model="form.phoneNumber" type="number"></b-form-input>
       </b-form-group>
-      <b-form-group id="input-group-3" label="نوع الحركة" label-for="input-3" class="text-right">
-        <b-form-select id="input-3" v-model="form.type" :options="types" required></b-form-select>
-      </b-form-group>
 
-      <div v-if="form.type === 'in' && form.type" class="text-right">
-        <b-form-group id="input-group-4" label="المبلغ" label-for="input-4">
-          <b-form-input id="input-4" v-model="form.totalAmount" type="number"></b-form-input>
-        </b-form-group>
-      </div>
 
-      <div v-else-if="form.type && form.type !== 'in'">
-        <b-form inline align="right" class="text-right mb-2">
-          <b-button @click="addDrug" style="margin-right:20px">add</b-button>
-          <cool-select v-model="selectedDrug" :items="drugs.map(a => a.name)" />
-          <b-form-input style="width:50px ; margin-left:20px" v-model="quantity" required></b-form-input>
-        </b-form>
-        <b-list-group class="mb-2">
-          <b-list-group-item v-for="drug in form.drugs" :key="drug.id" class="text-left">
-            <b-row>
-              <b-col>{{drug.quantity + ' | ' + drug.name }}</b-col>
-              <b-col>{{ drug.price * drug.quantity}}</b-col>
-            </b-row>
-          </b-list-group-item>
-        </b-list-group>
-        <b-row>
-          <b-col>{{ totalAmount}}</b-col>
-          <b-col>إجمالى المبلغ</b-col>
-        </b-row>
-      </div>
+
+
+
       <b-button type="submit" variant="primary">أضف</b-button>
       <b-button type="reset" variant="danger">مسح</b-button>
     </b-form>
@@ -81,37 +57,31 @@ export default {
     },
     drugNames: () => {
       return db.readRecord("drugs").map(a => a.name);
-    },
-    totalAmount: function() {
-      let sum = 0;
-      for (let i = 0; i < this.form.drugs.length; i++) {
-        sum += this.form.drugs[i].price * this.form.drugs[i].quantity;
-      }
-      return sum;
     }
   },
   methods: {
     onSubmit(evt) {
       evt.preventDefault();
-      //alert(JSON.stringify(this.form));
-      db.addRecord("moves", this.form);
+      alert(JSON.stringify(this.form));
     },
-
     addDrug() {
+      //   db.addRecord( 'drugs' ,     {
+      //   "id": 1,
+      //   "name" : "Hal54othane" ,
+      //   "price" : 35
+      // }  );
       console.log(db.readRecord("drugs"));
       if (!this.selectedDrug || !this.quantity || this.quantity < 1)
         alert("أضف كمية صحيحة");
       else {
         this.form.drugs.push({
           name: this.selectedDrug,
-          quantity: this.quantity,
-          price: 40
+          quantity: this.quantity
         });
         this.selectedDrug = null;
         this.quantity = 1;
       }
     },
-
     onReset(evt) {
       evt.preventDefault();
       // Reset our form values

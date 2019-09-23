@@ -1,34 +1,71 @@
 <template>
+
   <div class="m-1 text-right" align="right">
-    <b-table :items="items" :fields="fields" responsive="sm">
+    <b-row class="mb-2">
+      <b-col cols=8>
+        <b-form-input v-model="filters.selectedClient">
+
+        </b-form-input>
+      </b-col>
+            <b-col cols="1">
+        <b-form-input v-model="filters.min">
+
+        </b-form-input>
+      </b-col>
+            <b-col cols="1">
+        <b-form-input v-model="filters.max">
+
+        </b-form-input>
+      </b-col>
+    </b-row>
+    <b-table :items="moves" :fields="fields" responsive="sm">
       <template v-slot:cell(show_details)="row">
         <b-button
           size="sm"
           @click="row.toggleDetails"
           class="mr-2"
-        >{{ row.detailsShowing ? 'Hide' : 'Show'}} Details</b-button>
+        >{{ row.detailsShowing ? 'إخفى التفاصيل' : 'أظهر التفاصيل'}}</b-button>
       </template>
       <template v-slot:cell(type)="row">
         <div>{{ row.item.type? "وارد" : "صادر"}}</div>
       </template>
 
       <template v-slot:row-details="row">
-        <b-card>
-          <b-row class="mb-2">
-            <b-col sm="3" class="text-sm-right">
-              <b>Age:</b>
-            </b-col>
+        <b-card style="background-color:#CDCDCD">
+          <b-row class="mb-2" style="color:#FF5500">
             <b-col>{{ row.item.age }}</b-col>
-          </b-row>
-
-          <b-row class="mb-2">
-            <b-col sm="3" class="text-sm-right">
-              <b>Is Active:</b>
+            <b-col>
+              <b>السن</b>
             </b-col>
-            <b-col>{{ row.item.isActive }}</b-col>
           </b-row>
 
-          <b-button size="sm" @click="row.toggleDetails">Hide Details</b-button>
+          <b-row class="mb-2" style="color:#FF5500">
+            <b-col>{{ row.item.phoneNumber }}</b-col>
+            <b-col>
+              <b>رقم الموبايل</b>
+            </b-col>
+          </b-row>
+
+          <b-row class="mb-2" style="color:#FF5500">
+            <b-col>{{ row.item.totalAmount }}</b-col>
+            <b-col>
+              <b>إجمالى المبلغ</b>
+            </b-col>
+          </b-row>
+          <b-row class="mb-2">
+            <b-col>
+              <b-list-group>
+                <b-list-group-item v-for="drug in row.item.drugs" :key="drug.id">
+                  <b-row>
+                    <b-col>{{drug.quantity + ' | ' + drug.name }}</b-col>
+                    <b-col>{{ drug.price * drug.quantity}}</b-col>
+                  </b-row>
+                </b-list-group-item>
+              </b-list-group>
+            </b-col>
+          </b-row>
+
+          <b-button size="sm" @click="row.toggleDetails">إخفاء</b-button>
         </b-card>
       </template>
     </b-table>
@@ -36,7 +73,13 @@
 </template>
 
 <script>
+import db from "../store/lowDb/index";
 export default {
+  computed: {
+    moves: () => {
+      return db.readRecord("moves");
+    }
+  },
   data() {
     return {
       fields: [
@@ -54,18 +97,11 @@ export default {
           label: "نوع المعاملة"
         }
       ],
-      items: [
-        { isActive: true, type: true, age: 40, name: "محمد نشأت" },
-        { isActive: false, age: 21, name: "هشام المغربي", last_name: "Shaw" },
-        {
-          isActive: false,
-          age: 89,
-          first_name: "Geneva",
-          last_name: "Wilson",
-          _showDetails: false
-        },
-        { isActive: true, age: 38, first_name: "Jami", last_name: "Carney" }
-      ]
+      filters : {
+        selectedClient : null ,
+        min : 0 ,
+        max : null 
+      }
     };
   }
 };

@@ -8,10 +8,10 @@
         <router-link to="/addMove">أضف فاتورة</router-link>
       </b-nav-item>
       <b-nav-item>
-        <router-link to="/addMove">أضف عميل</router-link>
+        <router-link to="/addClient">أضف عميل</router-link>
       </b-nav-item>
       <b-nav-item>
-        <router-link to="/addMove">أضف دواء</router-link>
+        <router-link to="/addDrug">أضف دواء</router-link>
       </b-nav-item>
     </b-nav>
   </div>

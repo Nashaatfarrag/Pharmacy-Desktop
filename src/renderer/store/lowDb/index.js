@@ -1,17 +1,20 @@
 const low = require("lowdb");
+const shortid = require('shortid')
 const FileSync = require("lowdb/adapters/FileSync");
 
 const adapter = new FileSync("db.json");
 const db = low(adapter);
 
 // Set some defaults (required if your JSON file is empty)
-db.defaults({ posts: [] , drugs : [], user: {}, count: 0 }).write();
+db.defaults({ moves: [] , drugs : [], user: {}, count: 0 }).write();
+
 
 // Add a post
 function addRecord(collection, data) {
+  data._id = shortid.generate() ;
   db.get(collection)
     .push(data)
-    .write();
+    .write().id;
 }
 /*
 db.get("posts")
@@ -27,4 +30,12 @@ function readRecord(collection) {
 // Increment count
 db.update("count", n => n + 1).write();
 
-module.exports = { addRecord , readRecord };
+function findById ( collection , id ){
+   return db
+  .get(collection)
+  .find({ _id: id })
+  .value()
+}
+
+
+module.exports = { addRecord , readRecord , findById};

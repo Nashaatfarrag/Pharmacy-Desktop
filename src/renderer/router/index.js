@@ -17,6 +17,16 @@ export default new Router({
       component : require('@/components/mainTable').default
     },
     {
+      path : "/addClient",
+      name : "Client",
+      component : require('@/components/Client').default
+    },
+    {
+      path : "/addDrug",
+      name : "Drug",
+      component : require('@/components/Drug').default
+    },
+    {
       path: '*',
       redirect: '/'
     }
