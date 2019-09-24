@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-nav pills tabs fill>
+    <b-nav pills tabs fill >
       <b-nav-item >
         <router-link to="/mainTable" >عرض المعاملات</router-link>
       </b-nav-item>

@@ -20,47 +20,27 @@
   "user": {
     "name": "typicode"
   },
-  "count": 154,
+  "count": 297,
   "drugs": [
     {
-      "id": 1,
-      "name": "Oxygen",
-      "price": 35
-    },
-    {
-      "id": 1,
-      "name": "Nitrous oxide",
-      "price": 35
-    },
-    {
-      "id": 1,
-      "name": "Propofol",
-      "price": 35
-    },
-    {
-      "id": 1,
-      "name": "Bupivacaine",
-      "price": 35
-    },
-    {
-      "id": 1,
-      "name": "Bupivacaine",
-      "price": 35
-    },
-    {
-      "id": 1,
-      "name": "Bupivacaine",
-      "price": 35
-    },
-    {
-      "id": 1,
-      "name": "Ephedrine",
-      "price": 35
-    },
-    {
-      "id": 1,
       "name": "Lidocaine",
-      "price": 35
+      "price": "78",
+      "_id": "-OGSwDhp"
+    },
+    {
+      "name": "Bupivacaine",
+      "price": "20",
+      "_id": "G-sbgt7C"
+    },
+    {
+      "name": "Ketamine",
+      "price": "23",
+      "_id": "LNDYEo9Q"
+    },
+    {
+      "name": "Atropine",
+      "price": "159",
+      "_id": "RIm80_9g"
     }
   ],
   "moves": [

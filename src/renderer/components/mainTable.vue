@@ -14,11 +14,10 @@
       </b-col>
             <b-col cols="1">
         <b-form-input v-model="filters.max">
-
         </b-form-input>
       </b-col>
     </b-row>
-    <b-table :items="moves" :fields="fields" responsive="sm">
+    <b-table :items="moves" :fields="fields" responsive="sm" var="dark" > 
       <template v-slot:cell(show_details)="row">
         <b-button
           size="sm"

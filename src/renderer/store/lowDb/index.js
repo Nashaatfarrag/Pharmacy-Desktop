@@ -37,5 +37,10 @@ function findById ( collection , id ){
   .value()
 }
 
+function findByValue(collection , value){
 
-module.exports = { addRecord , readRecord , findById};
+  return db.get(collection).find(value).value()
+}
+
+
+module.exports = { addRecord , readRecord , findById , data : db};
