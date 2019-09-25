@@ -2,18 +2,9 @@
   <div style="margin:20px" class="text-center">
     <b-form @submit="onSubmit" @reset="onReset" v-if="show">
       <b-form-group id="input-group-2" label="إسم العميل" label-for="input-2" class="text-right">
-        <b-form-input
-          id="input-2"
-          v-model="form.name"
-          required
-          placeholder="Enter name"
-          type="text"
-        ></b-form-input>
+        <CoolSelect required v-model="selectedClient" :items="users" itemText="name"></CoolSelect>
       </b-form-group>
 
-      <b-form-group id="input-group-1" label="رقم الموبايل" label-for="input-1" class="text-right">
-        <b-form-input id="input-1" v-model="form.phoneNumber" type="number"></b-form-input>
-      </b-form-group>
       <b-form-group id="input-group-3" label="نوع الحركة" label-for="input-3" class="text-right">
         <b-form-select id="input-3" v-model="form.type" :options="types" required></b-form-select>
       </b-form-group>
@@ -27,7 +18,7 @@
       <div v-else-if="form.type && form.type !== 'in'">
         <b-form inline align="right" class="text-right mb-2">
           <b-button @click="addDrug" style="margin-right:20px">add</b-button>
-          <cool-select v-model="selectedDrug" :items="drugs.map(a => a.name)" />
+          <cool-select v-model="selectedDrug" :items="drugs" itemText="name" />
           <b-form-input style="width:50px ; margin-left:20px" v-model="quantity" required></b-form-input>
         </b-form>
         <b-list-group class="mb-2">
@@ -57,14 +48,13 @@ export default {
   data() {
     return {
       form: {
-        phoneNumber: "",
-        name: "",
         type: null,
         totalAmount: null,
         drugs: []
       },
       selectedDrug: null,
-      names: ["محمد", "نشأت"],
+      selectedClient: null,
+
       types: [
         { text: "Select One", value: null },
         { text: "وارد", value: "in" },
@@ -75,13 +65,15 @@ export default {
     };
   },
   computed: {
+    users: () => {
+      //console.log(db.readRecord('drugs'));
+      return db.readRecord("users");
+    },
     drugs: () => {
       //console.log(db.readRecord('drugs'));
       return db.readRecord("drugs");
     },
-    drugNames: () => {
-      return db.readRecord("drugs").map(a => a.name);
-    },
+
     totalAmount: function() {
       let sum = 0;
       for (let i = 0; i < this.form.drugs.length; i++) {
@@ -94,7 +86,27 @@ export default {
     onSubmit(evt) {
       evt.preventDefault();
       //alert(JSON.stringify(this.form));
+      if(this.form.type === 'in'){
+alert("ok")
+      }
+      else{
+      this.form.name = this.selectedClient.name;
+      this.form.phoneNumber = this.selectedClient.phoneNumber;
+      this.form.totalAmount = this.totalAmount;
+      alert("out")
+      let today = new Date();
+let dd = String(today.getDate()).padStart(2, '0');
+let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+let yyyy = today.getFullYear();
+
+today = mm + '/' + dd + '/' + yyyy;
+
+
+
+      this.form.when = today;
       db.addRecord("moves", this.form);
+      }
+
     },
 
     addDrug() {
@@ -103,9 +115,9 @@ export default {
         alert("أضف كمية صحيحة");
       else {
         this.form.drugs.push({
-          name: this.selectedDrug,
+          name: this.selectedDrug.name,
           quantity: this.quantity,
-          price: 40
+          price: this.selectedDrug.price
         });
         this.selectedDrug = null;
         this.quantity = 1;

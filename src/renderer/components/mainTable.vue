@@ -94,6 +94,10 @@ export default {
         {
           key: "type",
           label: "نوع المعاملة"
+        },
+              {
+          key: "when",
+          label: "time"
         }
       ],
       filters : {

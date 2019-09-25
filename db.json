@@ -1,5 +1,5 @@
 {
-  "count": 323,
+  "count": 344,
   "drugs": [
     {
       "name": "Lidocaine",
@@ -62,6 +62,61 @@
         }
       ],
       "_id": "U3HJds9y"
+    },
+    {
+      "type": "صادر",
+      "totalAmount": 78,
+      "drugs": [
+        {
+          "name": "Lidocaine",
+          "quantity": 1,
+          "price": "78"
+        }
+      ],
+      "name": "محمد نشأت",
+      "phoneNumber": "0101249089874",
+      "_id": "EOBeQpxv"
+    },
+    {
+      "type": "صادر",
+      "totalAmount": 98,
+      "drugs": [
+        {
+          "name": "Lidocaine",
+          "quantity": 1,
+          "price": "78"
+        },
+        {
+          "name": "Bupivacaine",
+          "quantity": 1,
+          "price": "20"
+        }
+      ],
+      "name": "هشام المغربي",
+      "phoneNumber": "010124908",
+      "when": "09/25/2019",
+      "_id": "6b7NUEqy",
+      "_showDetails": true
+    },
+    {
+      "type": "صادر",
+      "totalAmount": 2886,
+      "drugs": [
+        {
+          "name": "Lidocaine",
+          "quantity": 1,
+          "price": "78"
+        },
+        {
+          "name": "Lidocaine",
+          "quantity": "36",
+          "price": "78"
+        }
+      ],
+      "name": "محمد نشأت",
+      "phoneNumber": "0101249089874",
+      "when": "09/25/2019",
+      "_id": "8ujqCTVG"
     }
   ],
   "users": [
