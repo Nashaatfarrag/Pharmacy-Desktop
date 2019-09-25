@@ -6,7 +6,7 @@ const adapter = new FileSync("db.json");
 const db = low(adapter);
 
 // Set some defaults (required if your JSON file is empty)
-db.defaults({ moves: [] , drugs : [], user: {}, count: 0 }).write();
+db.defaults({ moves: [] , drugs : [], users: [], count: 0 }).write();
 
 
 // Add a post
@@ -16,13 +16,7 @@ function addRecord(collection, data) {
     .push(data)
     .write().id;
 }
-/*
-db.get("posts")
-  .push({ id: 1, title: "lowdb is awesome" })
-  .write();
-*/
-// * Set a user using Lodash shorthand syntax
-//db.set("user.name", "typicode").write();
+
 
 function readRecord(collection) {
   return db.get(collection).value();

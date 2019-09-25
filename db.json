@@ -1,26 +1,5 @@
 {
-  "posts": [
-    {
-      "id": 1,
-      "title": "lowdb is awesome"
-    },
-    {
-      "id": 1,
-      "title": "lowdb is awesome"
-    },
-    {
-      "hi": " bye",
-      "_id": "iLPcqn3B"
-    },
-    {
-      "hi": " bye",
-      "_id": "agmw0E88"
-    }
-  ],
-  "user": {
-    "name": "typicode"
-  },
-  "count": 297,
+  "count": 323,
   "drugs": [
     {
       "name": "Lidocaine",
@@ -34,7 +13,7 @@
     },
     {
       "name": "Ketamine",
-      "price": "23",
+      "price": "23.5",
       "_id": "LNDYEo9Q"
     },
     {
@@ -83,6 +62,32 @@
         }
       ],
       "_id": "U3HJds9y"
+    }
+  ],
+  "users": [
+    {
+      "name": "محمد نشأت",
+      "phoneNumber": "0101249089874",
+      "age": "23",
+      "_id": "2KQxJF83"
+    },
+    {
+      "name": "هشام المغربي",
+      "phoneNumber": "010124908",
+      "age": "23",
+      "_id": "zManaVvg"
+    },
+    {
+      "name": "هاي",
+      "phoneNumber": "01012490823",
+      "age": "232",
+      "_id": "M13Q2Qiq"
+    },
+    {
+      "name": "هشام",
+      "phoneNumber": "010124908",
+      "age": "23",
+      "_id": "GBl0UVH6"
     }
   ]
 }
