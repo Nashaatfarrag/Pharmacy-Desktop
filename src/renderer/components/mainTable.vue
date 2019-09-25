@@ -1,23 +1,49 @@
 <template>
-
-  <div class="m-1 text-right" align="right">
-    <b-row class="mb-2">
-      <b-col cols=8>
-        <b-form-input v-model="filters.selectedClient">
-
-        </b-form-input>
+  <b-container class="text-right" align="right">
+    <b-row class="filters p-1">
+      <b-col cols="2">
+        إجمالى المبالغ
+        <br />
+        الوارد {{money.moneyIn}}
+        <br />
+        الصادر {{money.moneyOut}}
+        <br />
+        <br />
+        الفرق {{money.moneyIn - money.moneyOut}}
+        <br />
       </b-col>
-            <b-col cols="1">
-        <b-form-input v-model="filters.min">
+      <b-col>
+        <b-row align-v="center" align-h="end">
+          <b-col cols="4">
+            <CoolSelect v-model="filters.selectedClient" :items="users" itemText="name"></CoolSelect>
+          </b-col>
+          <b-col cols="3">بحث بإسم العميل</b-col>
+        </b-row>
+        <b-row class="mt-1" align-v="center" align-h="end">
+          <b-col cols="2">
+            <b-form-input v-model="filters.max" type="number"></b-form-input>
+          </b-col>
+          <b-col cols="2">
+            الحد الأقصى
+          </b-col>
+          <b-col cols="2">
+            <b-form-input v-model="filters.min" type="number"></b-form-input>
+          </b-col>
+          <b-col cols="2">
+         الحد الأدني
+          </b-col>
 
-        </b-form-input>
-      </b-col>
-            <b-col cols="1">
-        <b-form-input v-model="filters.max">
-        </b-form-input>
+          <b-col cols="2">تحديد السعر</b-col>
+        </b-row>
+        <b-row></b-row>
       </b-col>
     </b-row>
-    <b-table :items="moves" :fields="fields" responsive="sm" var="dark" > 
+    <b-table
+      :items="filtered ? filtered : moves"
+      :fields="fields"
+      responsive="sm"
+      head-variant="light"
+    >
       <template v-slot:cell(show_details)="row">
         <b-button
           size="sm"
@@ -26,7 +52,7 @@
         >{{ row.detailsShowing ? 'إخفى التفاصيل' : 'أظهر التفاصيل'}}</b-button>
       </template>
       <template v-slot:cell(type)="row">
-        <div>{{ row.item.type? "وارد" : "صادر"}}</div>
+        <div>{{ row.item.type === "in" ? "وارد": "صادر"}}</div>
       </template>
 
       <template v-slot:row-details="row">
@@ -68,15 +94,54 @@
         </b-card>
       </template>
     </b-table>
-  </div>
+  </b-container>
 </template>
 
 <script>
 import db from "../store/lowDb/index";
+import { CoolSelect } from "vue-cool-select";
 export default {
+  name: "main-Table",
+  components: {
+    CoolSelect
+  },
   computed: {
-    moves: () => {
-      return db.readRecord("moves");
+    moves: () => db.readRecord("moves"),
+    users: () => db.readRecord("users"),
+    filtered: function() {
+      let data = this.moves;
+      console.log(data);
+      if (this.filters.selectedClient) {
+        data = data.filter(
+          val => val.name === this.filters.selectedClient.name
+        );
+      }
+      if(this.filters.min){
+        data = data.filter(val => val.totalAmount >= this.filters.min)
+      }
+
+            if(this.filters.max){
+        data = data.filter(val => val.totalAmount <= this.filters.max)
+      }
+      return data;
+    },
+    money: function() {
+      let data = this.filtered ? this.filtered : this.moves;
+      let result = {
+        moneyIn: 0,
+        moneyOut: 0
+      };
+      if (data) {
+        for (let i = 0; i < data.length; i++) {
+          let amount = data[i].totalAmount ? parseInt(data[i].totalAmount) : 0;
+          if (data[i].type === "in") {
+            result.moneyIn += amount;
+          } else {
+            result.moneyOut += amount;
+          }
+        }
+      }
+      return result;
     }
   },
   data() {
@@ -95,15 +160,20 @@ export default {
           key: "type",
           label: "نوع المعاملة"
         },
-              {
+        {
           key: "when",
-          label: "time"
+          label: "التاريخ",
+          sortable: true
+        },        {
+          key: "totalAmount",
+          label: "المبلغ",
+          sortable: true
         }
       ],
-      filters : {
-        selectedClient : null ,
-        min : 0 ,
-        max : null 
+      filters: {
+        selectedClient: null,
+        min: 0,
+        max: null
       }
     };
   }

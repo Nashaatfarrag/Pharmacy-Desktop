@@ -43,6 +43,7 @@
 <script>
 import { CoolSelect } from "vue-cool-select";
 import db from "../store/lowDb/index";
+import { type } from 'os';
 export default {
   components: { CoolSelect },
   data() {
@@ -87,7 +88,24 @@ export default {
       evt.preventDefault();
       //alert(JSON.stringify(this.form));
       if(this.form.type === 'in'){
-alert("ok")
+          let data = {
+            name : this.selectedClient.name,
+            type : "in",
+            totalAmount : this.form.totalAmount,
+            phoneNumber : this.selectedClient.phoneNumber
+          }
+                let today = new Date();
+let dd = String(today.getDate()).padStart(2, '0');
+let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+let yyyy = today.getFullYear();
+
+today = mm + '/' + dd + '/' + yyyy;
+
+
+
+      data.when = today;
+      alert("in");
+          db.addRecord("moves", data);
       }
       else{
       this.form.name = this.selectedClient.name;

@@ -1,5 +1,5 @@
 {
-  "count": 344,
+  "count": 416,
   "drugs": [
     {
       "name": "Lidocaine",
@@ -24,99 +24,45 @@
   ],
   "moves": [
     {
-      "phoneNumber": "01012490898",
       "name": "محمد نشأت",
-      "type": "صادر",
-      "age": 23,
-      "totalAmount": null,
-      "drugs": [
-        {
-          "name": "Nitrous oxide",
-          "quantity": 1,
-          "price": 40
-        }
-      ],
-      "_id": "U3HJds9y"
-    },
-    {
-      "phoneNumber": "01012490898",
-      "name": "هشام نشأت",
-      "type": "صادر",
-      "age": 23,
-      "totalAmount": 200,
-      "drugs": [
-        {
-          "name": "Nitrous oxide",
-          "quantity": 1,
-          "price": 50
-        },
-        {
-          "name": "Nitrous oxide",
-          "quantity": 1,
-          "price": 40
-        },
-        {
-          "name": "Nitrous oxide",
-          "quantity": 1,
-          "price": 40
-        }
-      ],
-      "_id": "U3HJds9y"
-    },
-    {
-      "type": "صادر",
-      "totalAmount": 78,
-      "drugs": [
-        {
-          "name": "Lidocaine",
-          "quantity": 1,
-          "price": "78"
-        }
-      ],
-      "name": "محمد نشأت",
+      "type": "in",
+      "totalAmount": "500",
       "phoneNumber": "0101249089874",
-      "_id": "EOBeQpxv"
+      "when": "09/25/2019",
+      "_id": "qe3J__Z8"
     },
     {
       "type": "صادر",
-      "totalAmount": 98,
+      "totalAmount": 797,
       "drugs": [
-        {
-          "name": "Lidocaine",
-          "quantity": 1,
-          "price": "78"
-        },
         {
           "name": "Bupivacaine",
           "quantity": 1,
           "price": "20"
-        }
-      ],
-      "name": "هشام المغربي",
-      "phoneNumber": "010124908",
-      "when": "09/25/2019",
-      "_id": "6b7NUEqy",
-      "_showDetails": true
-    },
-    {
-      "type": "صادر",
-      "totalAmount": 2886,
-      "drugs": [
-        {
-          "name": "Lidocaine",
-          "quantity": 1,
-          "price": "78"
         },
         {
-          "name": "Lidocaine",
-          "quantity": "36",
-          "price": "78"
+          "name": "Ketamine",
+          "quantity": "6",
+          "price": "23.5"
+        },
+        {
+          "name": "Atropine",
+          "quantity": "4",
+          "price": "159"
         }
       ],
-      "name": "محمد نشأت",
-      "phoneNumber": "0101249089874",
+      "name": "هاي",
+      "phoneNumber": "01012490823",
       "when": "09/25/2019",
-      "_id": "8ujqCTVG"
+      "_id": "htaOpKrN"
+    },
+    {
+      "name": "هاي",
+      "type": "in",
+      "totalAmount": "800",
+      "phoneNumber": "01012490823",
+      "when": "09/25/2019",
+      "_id": "64heLxvK"
     }
   ],
   "users": [
