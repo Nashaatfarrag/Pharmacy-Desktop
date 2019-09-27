@@ -1,6 +1,6 @@
 <template>
-  <div style="margin:20px" class="text-center">
-    <b-form @submit="onSubmit" @reset="onReset" v-if="show">
+  <div v-if="show" style="margin:20px" class="text-center">
+    <b-form @submit="onSubmit" @reset="onReset">
       <b-form-group id="input-group-2" label="إسم العميل" label-for="input-2" class="text-right">
         <CoolSelect required v-model="selectedClient" :items="users" itemText="name"></CoolSelect>
       </b-form-group>
@@ -11,7 +11,7 @@
 
       <div v-if="form.type === 'in' && form.type" class="text-right">
         <b-form-group id="input-group-4" label="المبلغ" label-for="input-4">
-          <b-form-input id="input-4" v-model="form.totalAmount" type="number"></b-form-input>
+          <b-form-input id="input-4" v-model="totalAmount" type="number"></b-form-input>
         </b-form-group>
       </div>
 
@@ -43,7 +43,7 @@
 <script>
 import { CoolSelect } from "vue-cool-select";
 import db from "../store/lowDb/index";
-import { type } from 'os';
+import { type } from "os";
 export default {
   components: { CoolSelect },
   data() {
@@ -59,7 +59,7 @@ export default {
       types: [
         { text: "Select One", value: null },
         { text: "وارد", value: "in" },
-        "صادر"
+        { text: "صادر", value: "out" }
       ],
       quantity: 1,
       show: true
@@ -87,46 +87,40 @@ export default {
     onSubmit(evt) {
       evt.preventDefault();
       //alert(JSON.stringify(this.form));
-      if(this.form.type === 'in'){
-          let data = {
-            name : this.selectedClient.name,
-            type : "in",
-            totalAmount : this.form.totalAmount,
-            phoneNumber : this.selectedClient.phoneNumber
-          }
-                let today = new Date();
-let dd = String(today.getDate()).padStart(2, '0');
-let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-let yyyy = today.getFullYear();
+      if (this.form.type === "in") {
+        let data = {
+          name: this.selectedClient.name,
+          type: "in",
+          totalAmount: this.totalAmount,
+          phoneNumber: this.selectedClient.phoneNumber,
+          age: this.selectedClient.age
+        };
 
-today = mm + '/' + dd + '/' + yyyy;
-
-
-
-      data.when = today;
-      alert("in");
-          db.addRecord("moves", data);
+        data.when = this.getMyDate();
+        alert("in");
+        db.addRecord("moves", data);
+      } else {
+        let data = {
+          name: this.selectedClient.name,
+          age: this.selectedClient.age,
+          phoneNumber: this.selectedClient.phoneNumber,
+          type: "out",
+          drugs: this.form.drugs,
+          totalAmount : this.totalAmount,
+        };
+        alert("out");
+        data.when = this.getMyDate();
+        db.addRecord("moves", data);
       }
-      else{
-      this.form.name = this.selectedClient.name;
-      this.form.phoneNumber = this.selectedClient.phoneNumber;
-      this.form.totalAmount = this.totalAmount;
-      alert("out")
-      let today = new Date();
-let dd = String(today.getDate()).padStart(2, '0');
-let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-let yyyy = today.getFullYear();
-
-today = mm + '/' + dd + '/' + yyyy;
-
-
-
-      this.form.when = today;
-      db.addRecord("moves", this.form);
-      }
-
     },
+    getMyDate() {
+      let today = new Date();
+      let dd = String(today.getDate()).padStart(2, "0");
+      let mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
+      let yyyy = today.getFullYear();
 
+      return (mm + "/" + dd + "/" + yyyy);
+    },
     addDrug() {
       console.log(db.readRecord("drugs"));
       if (!this.selectedDrug || !this.quantity || this.quantity < 1)
@@ -158,3 +152,8 @@ today = mm + '/' + dd + '/' + yyyy;
   }
 };
 </script>
+<style >
+input {
+  float: right;
+}
+</style>

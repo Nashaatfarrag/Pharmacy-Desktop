@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <navbar/>
-    <router-view></router-view>
+    <router-view id="app-view"></router-view>
   </div>
 </template>
 
@@ -26,6 +26,11 @@ import navbar from './components/navbar'
   {
     font-family: myFirstFont ;
   }
+
+  body{
+    background-color: whitesmoke;
+  }
+
        
 
 </style>

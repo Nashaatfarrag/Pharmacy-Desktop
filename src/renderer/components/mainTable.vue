@@ -1,7 +1,7 @@
 <template>
   <b-container class="text-right" align="right">
     <b-row class="filters p-1">
-      <b-col cols="2">
+      <b-col cols="2" class="container bg-danger">
         إجمالى المبالغ
         <br />
         الوارد {{money.moneyIn}}
@@ -10,7 +10,9 @@
         <br />
         <br />
         الفرق {{money.moneyIn - money.moneyOut}}
+        <br />عدد الحركات
         <br />
+        {{filtered? filtered.length:moves.length}}
       </b-col>
       <b-col>
         <b-row align-v="center" align-h="end">
@@ -23,19 +25,20 @@
           <b-col cols="2">
             <b-form-input v-model="filters.max" type="number"></b-form-input>
           </b-col>
-          <b-col cols="2">
-            الحد الأقصى
-          </b-col>
+          <b-col cols="2">الحد الأقصى</b-col>
           <b-col cols="2">
             <b-form-input v-model="filters.min" type="number"></b-form-input>
           </b-col>
-          <b-col cols="2">
-         الحد الأدني
-          </b-col>
+          <b-col cols="2">الحد الأدني</b-col>
 
           <b-col cols="2">تحديد السعر</b-col>
         </b-row>
-        <b-row></b-row>
+        <b-row class="mt-1" align-v="center" align-h="end">
+          <b-col cols="4">
+            <b-form-select style="max-width:250px;" v-model="filters.type" :options="types"></b-form-select>
+          </b-col>
+          <b-col cols="2">نوع الحركة</b-col>
+        </b-row>
       </b-col>
     </b-row>
     <b-table
@@ -57,26 +60,26 @@
 
       <template v-slot:row-details="row">
         <b-card style="background-color:#CDCDCD">
-          <b-row class="mb-2" style="color:#FF5500">
+          <b-row class="mb-2 text-primary">
+            <b-col>{{ row.item.totalAmount }}</b-col>
+            <b-col>
+              <b>إجمالى المبلغ</b>
+            </b-col>
+          </b-row>
+
+          <b-row class="mb-2 text-primary">
+            <b-col>{{ row.item.phoneNumber }}</b-col>
+            <b-col>
+              <b>رقم الموبايل</b>
+            </b-col>
+          </b-row>
+          <b-row class="mb-2 text-primary">
             <b-col>{{ row.item.age }}</b-col>
             <b-col>
               <b>السن</b>
             </b-col>
           </b-row>
 
-          <b-row class="mb-2" style="color:#FF5500">
-            <b-col>{{ row.item.phoneNumber }}</b-col>
-            <b-col>
-              <b>رقم الموبايل</b>
-            </b-col>
-          </b-row>
-
-          <b-row class="mb-2" style="color:#FF5500">
-            <b-col>{{ row.item.totalAmount }}</b-col>
-            <b-col>
-              <b>إجمالى المبلغ</b>
-            </b-col>
-          </b-row>
           <b-row class="mb-2">
             <b-col>
               <b-list-group>
@@ -110,18 +113,22 @@ export default {
     users: () => db.readRecord("users"),
     filtered: function() {
       let data = this.moves;
-      console.log(data);
+
       if (this.filters.selectedClient) {
         data = data.filter(
           val => val.name === this.filters.selectedClient.name
         );
       }
-      if(this.filters.min){
-        data = data.filter(val => val.totalAmount >= this.filters.min)
+      if (this.filters.min) {
+        data = data.filter(val => val.totalAmount >= this.filters.min);
       }
-
-            if(this.filters.max){
-        data = data.filter(val => val.totalAmount <= this.filters.max)
+      if (this.filters.type) {
+        data = data.filter(val => val.type === this.filters.type);
+      }
+      if (this.filters.max) {
+        data = data.filter(
+          val => val.totalAmount <= parseInt(this.filters.max)
+        );
       }
       return data;
     },
@@ -164,7 +171,8 @@ export default {
           key: "when",
           label: "التاريخ",
           sortable: true
-        },        {
+        },
+        {
           key: "totalAmount",
           label: "المبلغ",
           sortable: true
@@ -173,8 +181,14 @@ export default {
       filters: {
         selectedClient: null,
         min: 0,
-        max: null
-      }
+        max: null,
+        type: null
+      },
+      types: [
+        { text: "الكل", value: null },
+        { text: "وارد", value: "in" },
+        { text: "صادر", value: "out" }
+      ]
     };
   }
 };

@@ -1,5 +1,5 @@
 {
-  "count": 416,
+  "count": 530,
   "drugs": [
     {
       "name": "Lidocaine",
@@ -20,75 +20,57 @@
       "name": "Atropine",
       "price": "159",
       "_id": "RIm80_9g"
+    },
+    {
+      "name": "Atropinedd",
+      "price": "71",
+      "_id": "POOoJF-z"
+    },
+    {
+      "name": "Atropinefd",
+      "price": "78",
+      "_id": "MfgDkdML"
     }
   ],
   "moves": [
     {
-      "name": "محمد نشأت",
-      "type": "in",
-      "totalAmount": "500",
-      "phoneNumber": "0101249089874",
-      "when": "09/25/2019",
-      "_id": "qe3J__Z8"
-    },
-    {
-      "type": "صادر",
-      "totalAmount": 797,
+      "name": "هشام المغربي",
+      "age": "23",
+      "phoneNumber": "010124908",
+      "type": "out",
       "drugs": [
         {
-          "name": "Bupivacaine",
-          "quantity": 1,
-          "price": "20"
-        },
-        {
-          "name": "Ketamine",
-          "quantity": "6",
-          "price": "23.5"
-        },
-        {
-          "name": "Atropine",
-          "quantity": "4",
-          "price": "159"
+          "name": "Lidocaine",
+          "quantity": "5",
+          "price": "78"
         }
       ],
-      "name": "هاي",
-      "phoneNumber": "01012490823",
-      "when": "09/25/2019",
-      "_id": "htaOpKrN"
+      "totalAmount": 390,
+      "when": "09/27/2019",
+      "_id": "cokdctDm"
     },
     {
-      "name": "هاي",
+      "name": "هشام المغربي",
       "type": "in",
-      "totalAmount": "800",
-      "phoneNumber": "01012490823",
-      "when": "09/25/2019",
-      "_id": "64heLxvK"
+      "totalAmount": 390,
+      "phoneNumber": "010124908",
+      "age": "23",
+      "when": "09/27/2019",
+      "_id": "oGJdAMpq"
     }
   ],
   "users": [
     {
-      "name": "محمد نشأت",
-      "phoneNumber": "0101249089874",
+      "name": "خالد عامر",
+      "phoneNumber": "01274676519",
       "age": "23",
-      "_id": "2KQxJF83"
+      "_id": "WI7cl1gf"
     },
     {
-      "name": "هشام المغربي",
-      "phoneNumber": "010124908",
-      "age": "23",
-      "_id": "zManaVvg"
-    },
-    {
-      "name": "هاي",
-      "phoneNumber": "01012490823",
-      "age": "232",
-      "_id": "M13Q2Qiq"
-    },
-    {
-      "name": "هشام",
-      "phoneNumber": "010124908",
-      "age": "23",
-      "_id": "GBl0UVH6"
+      "name": "صالح خليل",
+      "phoneNumber": "010124656598",
+      "age": "27",
+      "_id": "zY1iNduR"
     }
   ]
 }

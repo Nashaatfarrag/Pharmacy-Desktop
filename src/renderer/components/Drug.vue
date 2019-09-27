@@ -17,9 +17,10 @@
         <b-form-input id="input-1" v-model="form.price" type="number"></b-form-input>
       </b-form-group>
 
-      <b-button type="submit" variant="primary" :disabled="has">أضف</b-button>
+      <b-button type="submit" variant="primary"  :disabled="has">أضف</b-button>
       <b-button type="reset" variant="success" :disabled="!has">تعديل السعر</b-button>
     </b-form>
+
   </div>
 </template>
 

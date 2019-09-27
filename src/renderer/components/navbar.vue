@@ -1,17 +1,18 @@
 <template>
+
   <div>
-    <b-nav pills tabs fill >
-      <b-nav-item >
-        <router-link to="/mainTable" >عرض المعاملات</router-link>
+    <b-nav tabs justified>
+      <b-nav-item>
+        <router-link class="btn" to="/mainTable">عرض المعاملات</router-link>
       </b-nav-item>
       <b-nav-item>
-        <router-link to="/addMove">أضف فاتورة</router-link>
+        <router-link class="btn" to="/addMove">أضف فاتورة</router-link>
       </b-nav-item>
       <b-nav-item>
-        <router-link to="/addClient">أضف عميل</router-link>
+        <router-link class="btn" to="/addClient">أضف عميل</router-link>
       </b-nav-item>
       <b-nav-item>
-        <router-link to="/addDrug">أضف دواء</router-link>
+        <router-link class="btn" to="/addDrug">أضف دواء</router-link>
       </b-nav-item>
     </b-nav>
   </div>
