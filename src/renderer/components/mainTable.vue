@@ -1,18 +1,17 @@
 <template>
-  <b-container class="text-right" align="right">
+  <b-container class="text-right" align="right" v-if="show">
     <b-row class="filters p-1">
-      <b-col cols="2" class="container bg-danger">
+      <b-col cols="2" class="container bg-info">
         إجمالى المبالغ
         <br />
-        الوارد {{money.moneyIn}}
+         {{money.moneyIn + ' الوارد'}}
         <br />
-        الصادر {{money.moneyOut}}
+       {{money.moneyOut + " الصادر"}}
         <br />
         <br />
-        الفرق {{money.moneyIn - money.moneyOut}}
-        <br />عدد الحركات
-        <br />
-        {{filtered? filtered.length:moves.length}}
+         {{money.moneyIn - money.moneyOut  + " الفرق"}}
+        <br /> 
+        {{(filtered? filtered.length:moves.length ) + " : عدد الحركات"}}
       </b-col>
       <b-col>
         <b-row align-v="center" align-h="end">
@@ -39,8 +38,19 @@
           </b-col>
           <b-col cols="2">نوع الحركة</b-col>
         </b-row>
+        <b-row class="mt-1" align-v="center" align-h="end">
+          <b-col cols="3">
+            <b-form-input style="max-width:300px;" type="date" v-model="filters.dateBefore"></b-form-input>
+          </b-col>
+          <b-col cols="1">إلى</b-col>
+          <b-col cols="3">
+            <b-form-input style="max-width:300px;" type="date" v-model="filters.dateAfter"></b-form-input>
+          </b-col>
+          <b-col cols="1">من</b-col>
+        </b-row>
       </b-col>
     </b-row>
+
     <b-table
       :items="filtered ? filtered : moves"
       :fields="fields"
@@ -57,9 +67,8 @@
       <template v-slot:cell(type)="row">
         <div>{{ row.item.type === "in" ? "وارد": "صادر"}}</div>
       </template>
-
       <template v-slot:row-details="row">
-        <b-card style="background-color:#CDCDCD">
+        <b-card style="background-color:#CCD">
           <b-row class="mb-2 text-primary">
             <b-col>{{ row.item.totalAmount }}</b-col>
             <b-col>
@@ -92,7 +101,7 @@
               </b-list-group>
             </b-col>
           </b-row>
-
+<b-button size="sm" variant="danger" @click="deleteElement(row.item._id)">مسح</b-button>
           <b-button size="sm" @click="row.toggleDetails">إخفاء</b-button>
         </b-card>
       </template>
@@ -103,6 +112,7 @@
 <script>
 import db from "../store/lowDb/index";
 import { CoolSelect } from "vue-cool-select";
+var count = 0;
 export default {
   name: "main-Table",
   components: {
@@ -130,6 +140,12 @@ export default {
           val => val.totalAmount <= parseInt(this.filters.max)
         );
       }
+      if (this.filters.dateAfter) {
+        data = data.filter(val => val.when >= this.filters.dateAfter);
+      }
+      if (this.filters.dateBefore) {
+        data = data.filter(val => val.when <= this.filters.dateBefore);
+      }
       return data;
     },
     money: function() {
@@ -151,8 +167,31 @@ export default {
       return result;
     }
   },
+  methods: {
+    deleteElement : function(id){
+      db.data.get('moves').remove({_id : id}).write();
+      this.reload();
+    },
+        reload() {
+      this.show = false;
+      this.$nextTick(() => {
+        this.show = true;
+      });},
+    loadMore: function() {
+      this.busy = true;
+      setTimeout(() => {
+        for (var i = 0, j = 4; i < j; i++) {
+          this.data.push({ name: count++ });
+        }
+        this.busy = false;
+      }, 1000);
+    }
+  },
   data() {
     return {
+      data: [],
+      busy: false,
+      show : true ,
       fields: [
         {
           key: "show_details",
@@ -182,7 +221,9 @@ export default {
         selectedClient: null,
         min: 0,
         max: null,
-        type: null
+        type: null,
+        dateBefore: null,
+        dateAfter: null
       },
       types: [
         { text: "الكل", value: null },

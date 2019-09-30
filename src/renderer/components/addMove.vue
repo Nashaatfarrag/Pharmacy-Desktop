@@ -1,8 +1,8 @@
 <template>
-  <div v-if="show" style="margin:20px" class="text-center">
+  <b-container v-if="show"  class="text-center">
     <b-form @submit="onSubmit" @reset="onReset">
       <b-form-group id="input-group-2" label="إسم العميل" label-for="input-2" class="text-right">
-        <CoolSelect required v-model="selectedClient" :items="users" itemText="name"></CoolSelect>
+        <CoolSelect required v-model="selectedClient" :items="users" scrollItemsLimit=4 itemText="name"></CoolSelect>
       </b-form-group>
 
       <b-form-group id="input-group-3" label="نوع الحركة" label-for="input-3" class="text-right">
@@ -11,7 +11,7 @@
 
       <div v-if="form.type === 'in' && form.type" class="text-right">
         <b-form-group id="input-group-4" label="المبلغ" label-for="input-4">
-          <b-form-input id="input-4" v-model="totalAmount" type="number"></b-form-input>
+          <b-form-input id="input-4" v-model="inTotalAmount" type="number"></b-form-input>
         </b-form-group>
       </div>
 
@@ -34,10 +34,10 @@
           <b-col>إجمالى المبلغ</b-col>
         </b-row>
       </div>
-      <b-button type="submit" variant="primary">أضف</b-button>
-      <b-button type="reset" variant="danger">مسح</b-button>
+      <b-button style="margin-top:20px" type="submit" variant="primary">أضف</b-button>
+      <b-button style="margin-top:20px" type="reset" variant="danger">مسح</b-button>
     </b-form>
-  </div>
+  </b-container>
 </template>
 
 <script>
@@ -62,7 +62,8 @@ export default {
         { text: "صادر", value: "out" }
       ],
       quantity: 1,
-      show: true
+      show: true,
+      inTotalAmount : 0 
     };
   },
   computed: {
@@ -87,11 +88,15 @@ export default {
     onSubmit(evt) {
       evt.preventDefault();
       //alert(JSON.stringify(this.form));
+      if(!this.totalAmount && !this.form.totalAmount ){
+        alert("المجموع الكلي يجب ان يكون اكبر من الصفر")
+      }
+      else {
       if (this.form.type === "in") {
         let data = {
           name: this.selectedClient.name,
           type: "in",
-          totalAmount: this.totalAmount,
+          totalAmount: parseInt(this.inTotalAmount),
           phoneNumber: this.selectedClient.phoneNumber,
           age: this.selectedClient.age
         };
@@ -111,7 +116,7 @@ export default {
         alert("out");
         data.when = this.getMyDate();
         db.addRecord("moves", data);
-      }
+      }}
     },
     getMyDate() {
       let today = new Date();
@@ -119,7 +124,7 @@ export default {
       let mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
       let yyyy = today.getFullYear();
 
-      return (mm + "/" + dd + "/" + yyyy);
+      return (yyyy + "-" + mm + "-" + dd);
     },
     addDrug() {
       console.log(db.readRecord("drugs"));
@@ -139,10 +144,9 @@ export default {
     onReset(evt) {
       evt.preventDefault();
       // Reset our form values
-      this.form.email = "";
-      this.form.name = "";
-      this.form.food = null;
-      this.form.checked = [];
+      this.form.type = null;
+      this.form.drugs = [];
+
       // Trick to reset/clear native browser form validation state
       this.show = false;
       this.$nextTick(() => {

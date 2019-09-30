@@ -8393,6 +8393,11 @@ vm-browserify@^1.0.1:
   resolved "https://registry.yarnpkg.com/vm-browserify/-/vm-browserify-1.1.0.tgz#bd76d6a23323e2ca8ffa12028dc04559c75f9019"
   integrity sha512-iq+S7vZJE60yejDYM0ek6zg308+UZsdtPExWP9VZoCFCz1zkJoXFnAX7aZfd/ZwrkidzdUZL0C/ryW+JwAiIGw==
 
+vue-autosuggest@^2.0.4:
+  version "2.0.4"
+  resolved "https://registry.yarnpkg.com/vue-autosuggest/-/vue-autosuggest-2.0.4.tgz#ef1bc2eeac6f569d9b638d3af727400b34d19677"
+  integrity sha512-hKklFkSy80s9keIcYFlw52NC8kyhaCTV5K2iL2pxL39T8l7i3E4jdeLvz8H21Quix9oDVRO02bJy8GkUF42T/w==
+
 vue-cli-plugin-vuetify@^0.6.3:
   version "0.6.3"
   resolved "https://registry.yarnpkg.com/vue-cli-plugin-vuetify/-/vue-cli-plugin-vuetify-0.6.3.tgz#71d956cdec419f5628d2b44c43bdc1e6ec3356bf"
@@ -8428,6 +8433,11 @@ vue-html-loader@^1.2.4:
     html-minifier "^2.1.5"
     loader-utils "^1.0.2"
     object-assign "^4.1.0"
+
+vue-infinite-scroll@^2.0.2:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/vue-infinite-scroll/-/vue-infinite-scroll-2.0.2.tgz#ca37a91fe92ee0ad3b74acf8682c00917144b711"
+  integrity sha512-n+YghR059YmciANGJh9SsNWRi1YZEBVlODtmnb/12zI+4R72QZSWd+EuZ5mW6auEo/yaJXgxzwsuhvALVnm73A==
 
 vue-loader@^15.2.4:
   version "15.7.1"

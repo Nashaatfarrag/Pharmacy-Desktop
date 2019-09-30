@@ -8,6 +8,8 @@ import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import VueSelect from 'vue-cool-select'
 require('vue2-animate/dist/vue2-animate.min.css')
+const infiniteScroll =  require('vue-infinite-scroll');
+Vue.use(infiniteScroll)
 
  
  

@@ -1,16 +1,16 @@
 <template>
-  <b-container  class="text-center p-2"  v-if="show">
-    <b-form >
+  <b-container class="text-center" v-if="show">
+    <b-form>
       <b-form-group id="input-group-2" label="إسم العميل" label-for="input-2" class="text-right">
         <vue-simple-suggest
           v-model="chosen"
           :list="userNames"
-          :min-length="2"
+          :min-length="3"
+          :styles="autoCompleteStyle"
           @hide-list="getData"
-          :filter-by-query="true"
-        >
-          <!-- Filter by input text to only show the matching results -->
-        </vue-simple-suggest>
+          :filter-by-query=true
+          :destyled=true
+        ></vue-simple-suggest>
       </b-form-group>
 
       <b-form-group id="input-group-3" label="رقم الموبايل" label-for="input-3" class="text-right">
@@ -19,13 +19,12 @@
       <b-form-group id="input-group-1" label="السن" label-for="input-1" class="text-right mb-1">
         <b-form-input id="input-1" v-model="form.age" type="number"></b-form-input>
       </b-form-group>
-
     </b-form>
-      <div id="controller">
-        <b-button @click="onSubmit" variant="primary" :disabled="has">أضف</b-button>
-        <b-button @click="onReset" variant="success" :disabled="!has">تعديل البيانات</b-button>
-        <b-button @click="remove" variant="danger" :disabled="!has">مسح العميل</b-button>
-      </div>
+    <div id="controller">
+      <b-button @click="onSubmit" variant="primary" :disabled="has">أضف</b-button>
+      <b-button @click="onReset" variant="success" :disabled="!has">تعديل البيانات</b-button>
+      <b-button @click="remove" variant="danger" :disabled="!has">مسح العميل</b-button>
+    </div>
   </b-container>
 </template>
 
@@ -33,16 +32,24 @@
 import { CoolSelect } from "vue-cool-select";
 import db from "../store/lowDb/index";
 import VueSimpleSuggest from "vue-simple-suggest";
+import { VueAutosuggest } from "vue-autosuggest";
 import "vue-simple-suggest/dist/styles.css"; // Using a css-loader
 export default {
   name: "client",
-  components: { CoolSelect, VueSimpleSuggest },
+  components: { CoolSelect, VueSimpleSuggest, VueAutosuggest },
   data() {
     return {
       form: {
         age: null,
         name: null,
         phoneNumber: ""
+      },
+      autoCompleteStyle: {
+        vueSimpleSuggest: "position-relative",
+        inputWrapper: "",
+        defaultInput: "form-control",
+        suggestions: "position-absolute list-group z-1000 hi",
+        suggestItem: "list-group-item"
       },
       show: true,
       chosen: null,
@@ -93,6 +100,7 @@ export default {
             phoneNumber: this.form.phoneNumber,
             age: this.form.age
           });
+          this.move();
         }
       } else {
         alert("أدخل قيم صحيحة");
@@ -117,6 +125,9 @@ export default {
       this.form = {};
       this.updateData();
     },
+    move: function() {
+      //this.$router.push("/mainTable");
+    },
     onReset(evt) {
       evt.preventDefault();
       // Reset our form values
@@ -131,6 +142,22 @@ export default {
 };
 </script>
 <style  scoped>
-#controller{margin-top: 60px;}
+#controller {
+  margin-top: 60px;
+}
+.z-1000 {
+  z-index: 1000;
+}
+
+.hover {
+  background-color: #007bff;
+  color: #fff;
+}
+
+input { 
+    text-align: right; 
+}
+
+
 
 </style>

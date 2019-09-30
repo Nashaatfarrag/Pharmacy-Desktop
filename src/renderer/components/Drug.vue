@@ -1,5 +1,5 @@
 <template>
-  <div style="margin:20px" class="text-center">
+  <b-container class="text-center">
     <b-form @submit="onSubmit" @reset="onReset" v-if="show">
       <b-form-group id="input-group-2" label="إسم الدواء" label-for="input-2" class="text-right">
         <vue-simple-suggest
@@ -16,12 +16,12 @@
       <b-form-group id="input-group-1" label="السعر" label-for="input-1" class="text-right">
         <b-form-input id="input-1" v-model="form.price" type="number"></b-form-input>
       </b-form-group>
-
-      <b-button type="submit" variant="primary"  :disabled="has">أضف</b-button>
-      <b-button type="reset" variant="success" :disabled="!has">تعديل السعر</b-button>
+      <div >
+        <b-button style="margin-top:20px" type="submit" variant="primary" :disabled="has">أضف</b-button>
+        <b-button  style="margin-top:20px" type="reset" variant="success" :disabled="!has">تعديل السعر</b-button>
+      </div>
     </b-form>
-
-  </div>
+  </b-container>
 </template>
 
 <script>

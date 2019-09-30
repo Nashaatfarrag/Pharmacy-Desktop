@@ -27,9 +27,7 @@ import navbar from './components/navbar'
     font-family: myFirstFont ;
   }
 
-  body{
-    background-color: whitesmoke;
-  }
+
 
        
 

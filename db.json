@@ -1,5 +1,5 @@
 {
-  "count": 530,
+  "count": 630,
   "drugs": [
     {
       "name": "Lidocaine",
@@ -34,29 +34,85 @@
   ],
   "moves": [
     {
-      "name": "هشام المغربي",
+      "name": "محمد نشات",
+      "age": null,
+      "phoneNumber": "",
+      "type": "out",
+      "drugs": [
+        {
+          "name": "Bupivacaine",
+          "quantity": 1,
+          "price": "20"
+        },
+        {
+          "name": "Bupivacaine",
+          "quantity": 1,
+          "price": "20"
+        }
+      ],
+      "totalAmount": 40,
+      "when": "2019-09-30",
+      "_id": "ei2kpmAG"
+    },
+    {
+      "name": "محمد نشات",
+      "age": null,
+      "phoneNumber": "",
+      "type": "out",
+      "drugs": [
+        {
+          "name": "Bupivacaine",
+          "quantity": 1,
+          "price": "20"
+        },
+        {
+          "name": "Bupivacaine",
+          "quantity": 1,
+          "price": "20"
+        }
+      ],
+      "totalAmount": 40,
+      "when": "2019-09-30",
+      "_id": "iU7-G4mL"
+    },
+    {
+      "name": "محمد نشات",
+      "type": "in",
+      "totalAmount": 56,
+      "phoneNumber": "",
+      "age": null,
+      "when": "2019-09-30",
+      "_id": "js9lvPJd"
+    },
+    {
+      "name": "محمد نشات",
+      "type": "in",
+      "totalAmount": 56,
+      "phoneNumber": "",
+      "age": null,
+      "when": "2019-09-30",
+      "_id": "ESmtqdFj"
+    },
+    {
+      "name": "خالد عامر",
       "age": "23",
-      "phoneNumber": "010124908",
+      "phoneNumber": "01274676519",
       "type": "out",
       "drugs": [
         {
           "name": "Lidocaine",
-          "quantity": "5",
+          "quantity": 1,
           "price": "78"
+        },
+        {
+          "name": "Bupivacaine",
+          "quantity": 1,
+          "price": "20"
         }
       ],
-      "totalAmount": 390,
-      "when": "09/27/2019",
-      "_id": "cokdctDm"
-    },
-    {
-      "name": "هشام المغربي",
-      "type": "in",
-      "totalAmount": 390,
-      "phoneNumber": "010124908",
-      "age": "23",
-      "when": "09/27/2019",
-      "_id": "oGJdAMpq"
+      "totalAmount": 98,
+      "when": "2019-09-30",
+      "_id": "Q74WDy47"
     }
   ],
   "users": [
@@ -71,6 +127,24 @@
       "phoneNumber": "010124656598",
       "age": "27",
       "_id": "zY1iNduR"
+    },
+    {
+      "name": "محمد نشات",
+      "phoneNumber": "",
+      "age": null,
+      "_id": "Z-5ZlbN-"
+    },
+    {
+      "name": "هشام المغربي",
+      "phoneNumber": "",
+      "age": null,
+      "_id": "Yo0FewG8"
+    },
+    {
+      "name": "محمد",
+      "phoneNumber": "",
+      "age": null,
+      "_id": "MzmslQ0C"
     }
   ]
 }
